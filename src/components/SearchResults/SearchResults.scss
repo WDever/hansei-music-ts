@@ -1,0 +1,17 @@
+.results-wrapper {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 90%;
+  height: 25.4rem;
+  overflow-y: auto;
+}
+
+.visibility {
+  display: flex;
+}
+
+p {
+  color: #966dcf;
+}

@@ -1,0 +1,92 @@
+.item {
+  width: 12.5rem;
+  height: 12.5rem;
+  display: flex;
+  flex-direction: column-reverse;
+  margin: 2rem;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    .title {
+      display: none;
+    }
+
+    .reservation {
+      display: flex;
+    }
+  }
+
+  .title {
+    display: flex;
+    width: 12.5rem;
+    height: auto;
+    text-align: center;
+    max-height: 3rem;
+    background-color: rgba(0, 0, 0, 0.74);
+    color: white;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .reservation {
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.74);
+    color: white;
+    font-weight: bold;
+    z-index: 2;
+  }
+
+  img {
+    position: absolute;
+    z-index: 0;
+  }
+}
+
+.search-item {
+  z-index: 1;
+  width: 99.5%;
+  height: 5rem;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #966dcf;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+
+  .search-data {
+    display: flex;
+    margin-left: 1rem;
+    align-items: center;
+    width: 80%;
+
+    .search-img {
+      height: 3rem;
+      width: 3rem;
+    }
+
+    .search-info {
+      display: flex;
+      height: 3.5rem;
+      flex-direction: column;
+      justify-content: space-around;
+      margin: 0.5rem;
+    }
+  }
+
+  .search-reservation {
+    cursor: pointer;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: #df9fcf;
+  }
+}

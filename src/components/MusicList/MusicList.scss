@@ -1,0 +1,21 @@
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  .top-title {
+    width: 94%;
+    font-weight: bold;
+    font-size: 5rem;
+    color: #df9fcf;
+    opacity: 0.5;
+  }
+
+  .no-result {
+    // color: #966dcf;
+    color: black;
+    margin: 5rem;
+    font-size: 1.5rem;
+  }
+}

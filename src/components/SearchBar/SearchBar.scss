@@ -1,0 +1,38 @@
+.search-template {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .search-bar {
+    border: none;
+    border-bottom: 1.5px solid #966dcf;
+    width: 94%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    .search {
+      width: 96%;
+      font-size: 2rem;
+      border: none;
+      outline: none;
+      color: #966dcf;
+      background-color: transparent;
+    }
+
+    button {
+      background-color: transparent;
+      outline: none;
+      border: none;
+    }
+
+    .icon {
+      background-color: transparent;
+    }
+  }
+}
+
+::placeholder {
+  color: #966dcf;
+}

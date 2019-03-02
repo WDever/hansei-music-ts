@@ -1,0 +1,56 @@
+.change-template {
+  width: 93%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .change-wrapper {
+    display: flex;
+    width: 20%;
+
+    .change {
+      cursor: pointer;
+      width: 3rem;
+      height: 3rem;
+      color: rgba(144, 144, 144, 0.35);
+      font-size: 1.2rem;
+      font-weight: bold;
+      font-style: normal;
+      display: flex;
+      align-items: center;
+    }
+
+    .active {
+      color: #8454c7;
+    }
+  }
+
+  .userInfo {
+    width: 10rem;
+    display: flex;
+    justify-content: space-around;
+    font-weight: 500;
+
+    .logout {
+      cursor: pointer;
+    }
+  }
+
+  .fb {
+    cursor: pointer;
+    outline: none;
+    border: none;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    background-color: white;
+  }
+
+  .fbnone {
+    display: none;
+  }
+  
+  .test {
+    display: none;
+  }
+}
