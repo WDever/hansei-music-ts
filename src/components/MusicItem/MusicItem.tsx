@@ -1,11 +1,29 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import styles from './MusicItem.scss';
 
 const cx = classNames.bind(styles);
 
-const MusicItem = ({ title, src, onClick }) => (
+interface MusicItemProps {
+  title: string;
+  src: string;
+  onClick(): void;
+}
+
+interface PlaylistItemProps {
+  title: string;
+  src: string;
+  detail: string;
+}
+
+interface SearchItemProps {
+  title: string;
+  src: string;
+  artist: string;
+  onClick(): void;
+}
+
+const MusicItem: React.SFC<MusicItemProps> = ({ title, src, onClick }) => (
   <div
     className={cx('item')}
     onClick={onClick}
@@ -16,7 +34,7 @@ const MusicItem = ({ title, src, onClick }) => (
   </div>
 );
 
-export const PlaylistItem = ({ title, src, detail }) => (
+export const PlaylistItem: React.SFC<PlaylistItemProps> = ({ title, src, detail }) => (
   <a
     className={cx('item')}
     href={detail}
@@ -29,7 +47,7 @@ export const PlaylistItem = ({ title, src, detail }) => (
   </a>
 );
 
-export const SearchItem = ({ title, src, artist, onClick }) => (
+export const SearchItem: React.SFC<SearchItemProps> = ({ title, src, artist, onClick }) => (
   <div className={cx('search-item')}>
     <div className={cx('search-data')}>
       <img className={cx('search-img')} src={src} alt="album art" />
@@ -44,41 +62,22 @@ export const SearchItem = ({ title, src, artist, onClick }) => (
   </div>
   );
 
-PlaylistItem.propTypes = {
-  title: PropTypes.string,
-  src: PropTypes.string,
-  detail: PropTypes.string,
-};
-
 PlaylistItem.defaultProps = {
   title: 'ERROR!',
-  src: null,
+  src: '',
   detail: 'none',
-};
-
-SearchItem.propTypes = {
-  title: PropTypes.string,
-  src: PropTypes.string,
-  artist: PropTypes.string,
-  onClick: PropTypes.func,
 };
 
 SearchItem.defaultProps = {
   title: 'ERROR!',
-  src: null,
+  src: '',
   artist: '',
   onClick: () => console.log('no onClick'),
 };
 
-MusicItem.propTypes = {
-  title: PropTypes.string,
-  src: PropTypes.string,
-  onClick: PropTypes.func,
-};
-
 MusicItem.defaultProps = {
   title: 'ERROR!',
-  src: null,
+  src: '',
   onClick: () => console.log('no onClick'),
 };
 

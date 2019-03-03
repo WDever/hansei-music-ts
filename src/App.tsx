@@ -3,7 +3,7 @@ import React from 'react';
 import MusicListContainer from './container/MusicListContainer';
 import PageTemplate from './components/PageTemplate';
 import SearchBarContainer from './container/SearchBarContainer';
-import './App.css';
+import './App.scss';
 
 class App extends React.Component {
   render() {

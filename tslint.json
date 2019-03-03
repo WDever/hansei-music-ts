@@ -1,12 +1,16 @@
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint:recommended",
-        "tslint-react",
-        "tslint-config-airbnb",
-        "tslint-config-prettier"
-    ],
-    "jsRules": {},
-    "rules": {},
-    "rulesDirectory": []
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-config-airbnb",
+    "tslint-config-prettier"
+  ],
+  "jsRules": {},
+  "rules": {
+    "variable-name": false,
+    "semicolon": [false, "always", "ignore-bound-class-methods"],
+    "import-name": false,
+  },
+  "rulesDirectory": []
 }
