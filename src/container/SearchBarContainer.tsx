@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/forbid-prop-types */
-import React from 'react';
+import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import SearchBar from '../components/SearchBar';
 import SearchResults from '../components/SearchResults';
@@ -12,6 +12,45 @@ import * as api from '../lib/api';
 import * as searchActions from '../store/modules/search';
 import * as musicListActions from '../store/modules/musicList';
 import * as loginActions from '../store/modules/login';
+
+ const {
+      input,
+      placeholder,
+      canReservation,
+      Tlist,
+      Allist,
+      Arlist,
+      flag,
+      cat,
+      loading,
+      focus,
+      isLogin,
+      userInfo,
+      noResultsInput,
+      isLoaded,
+      autoLogin,
+      code,
+    } = this.props;
+interface SearchBarProps {
+  code: number;
+  changer: React.ReactElement;
+  canReservation: boolean
+  onFocus(bool: boolean): void;
+  onClick(input: string): void;
+}
+interface SearchChangerProps {
+  cat: number;
+  changeResults(cat: number): void;
+  // userInfo: userInfo;
+  logout(): void;
+  autoLogin: boolean;
+  loginCallback(): void;
+}
+interface SearchBarContainerProps {
+  input: string;
+  placeholder: string;
+  canReservation: 
+}
 
 class SearchBarContainer extends React.Component {
   componentDidMount = () => {
@@ -364,32 +403,11 @@ const mapStateToProps = ({ search, musicList, login }) => ({
   autoLogin: login.autoLogin,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   SearchActions: bindActionCreators(searchActions, dispatch),
   MusicListActions: bindActionCreators(musicListActions, dispatch),
   LoginActions: bindActionCreators(loginActions, dispatch),
 });
-
-SearchBarContainer.propTypes = {
-  canReservation: PropTypes.bool,
-  // hour: PropTypes.number,
-  // min: PropTypes.number,
-  // sec: PropTypes.number,
-  input: PropTypes.string,
-  placeholder: PropTypes.string,
-  Tlist: PropTypes.array,
-  Allist: PropTypes.array,
-  Arlist: PropTypes.array,
-};
-
-SearchBarContainer.defaultProps = {
-  canReservation: true,
-  input: '',
-  placeholder: '',
-  Tlist: [],
-  Allist: [],
-  Arlist: [],
-};
 
 export default withRouter(
   connect(

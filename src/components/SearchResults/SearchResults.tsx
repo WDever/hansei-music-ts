@@ -1,6 +1,6 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import * as React from 'react';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import { Circle } from 'better-react-spinkit';

@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { TiSocialFacebookCircular } from 'react-icons/ti';
 import FacebookLogin from 'react-facebook-login';
 import classNames from 'classnames/bind';
