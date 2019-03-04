@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import * as musicListActions from '../store/modules/musicList';
 import * as searchActions from '../store/modules/search';
@@ -9,27 +8,38 @@ import * as loginActions from '../store/modules/login';
 import MusicList from '../components/MusicList';
 import * as api from '../lib/api';
 
-class MusicListContainder extends React.Component {
-  async componentDidMount () {
+interface MusicListContainerProps {
+  // list: list
+  loading: boolean;
+  flag: boolean;
+  check: boolean;
+  code: number;
+  // MusicListActions: typeof musicListActions
+  // SearchActions: typeof searchActions
+  // LoginActions: typeof loginActions
+}
+
+class MusicListContainer extends React.Component<MusicListContainerProps> {
+  componentDidMount = async (): Promise<void> => {
     await this.getCHECK();
 
-    const hour = moment().format('H');
+    const hour: number = Number(moment().format('H'));
 
     const { code } = this.props;
 
-    return code === 423 || hour >= 12 ? this.getPLAYLIST(true) : this.getTOP();
+    code === 423 || hour >= 12 ? this.getPLAYLIST(true) : this.getTOP();
     // this.getTOP();
   };
 
-  handleClick = async (title, album, artist, id) => {
+  handleClick = async (title: string, album: string, artist: string, id: number): Promise<void> => {
     await this.postAPPLY(title, album, artist, id);
     await this.getCHECK();
     const { code } = this.props;
     console.log(code)
-    return code === 423 ? this.getPLAYLIST(false) : null;
+    code === 423 ? this.getPLAYLIST(false) : null;
   }
 
-  getTOP = async () => {
+  getTOP = async (): Promise<void> => {
     const { MusicListActions } = this.props;
 
     try {
@@ -49,14 +59,14 @@ class MusicListContainder extends React.Component {
     }
   };
 
-  postAPPLY = async (title, album, artist, id) => {
+  postAPPLY = async (title: string, album: string, artist: string, id: number) => {
     try {
       const { userInfo } = this.props;
       const { keyToken } = userInfo;
       const response = await api.postAPPLY(title, album, artist, id, keyToken);
-      const { message, code } = response.data;
+      const { message } = response.data;
       console.log(id);
-      alert(message, code);
+      alert(message);
       console.log(response);
     } catch (e) {
       console.log(e);
@@ -76,7 +86,7 @@ class MusicListContainder extends React.Component {
     }
   }
 
-  getPLAYLIST = async (bool) => {
+  getPLAYLIST = async (bool: boolean) => {
     const { MusicListActions, check } = this.props;
 
     try {
@@ -99,7 +109,7 @@ class MusicListContainder extends React.Component {
         return MusicListActions.setData(title, imgSrc, album, artist, id++, url);
       });
       
-      return bool ? MusicListActions.loading() : null;
+      bool ? MusicListActions.loading() : null;
     } catch (e) {
       console.log(e);
     }
@@ -121,24 +131,13 @@ const mapStateToProps = ({ musicList, search, login }) => ({
   userInfo: login.userInfo,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   MusicListActions: bindActionCreators(musicListActions, dispatch),
   SearchActions: bindActionCreators(searchActions, dispatch),
   LoginActions: bindActionCreators(loginActions, dispatch),
 });
 
-MusicListContainder.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  list: PropTypes.array,
-  loading: PropTypes.bool
-};
-
-MusicListContainder.defaultProps = {
-  list: [],
-  loading: true
-};
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(MusicListContainder);
+)(MusicListContainer);

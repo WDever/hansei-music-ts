@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
@@ -7,70 +7,78 @@ import { ReactComponent as Icon } from './searchIcon.svg';
 
 const cx = classNames.bind(styles);
 
-class SearchBar extends React.Component {
-  state = {
+interface SearchBarProps {
+  code: number;
+  changer: React.ReactElement;
+  canReservation: boolean
+  onFocus(bool: boolean): void;
+  onClick(input: string): void;
+}
+
+interface SearchBarState {
+  input: string;
+  placeholder: string;
+}
+
+class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
+  state: SearchBarState = {
     input: '',
     placeholder: '',
   }
 
-  componentDidMount = () => {
+  componentDidMount = (): void => {
     const { code } = this.props;
-    const hour = moment().format('H') * 3600;
-    const min = moment().format('m') * 60;
-    const sec = moment().format('s') * 1;
+    const hour: number = Number(moment().format('H')) * 3600;
+    const min: number = Number(moment().format('m')) * 60;
+    const sec: number = Number(moment().format('s'));
 
     const sum = hour + min + sec;
 
-    // if(sum < 30000) {
-    //   setInterval(() => this.setTime(), 1000);
-    // }
-
-    setInterval(() => this.setTime(), 1000);
+    setInterval((): void => this.setTime(), 1000);
 
     if (sum >= 30000 && sum <= 43200 && code !== 423) {
-      this.setState(() => ({
+      this.setState((): object => ({
         placeholder: '',
       }));
     }
 
     else if (sum > 43200 || code === 423) {
-      this.setState(() => ({
+      this.setState((): object => ({
         placeholder: '오늘의 예약이 마감되었습니다.',
       }));
     }
   }
 
-  setTime = () => {
+  setTime = (): void => {
     const { code } = this.props;
     const { placeholder } = this.state;
 
-    const hour = moment().format('H');
-    const min = moment().format('m');
-    const sec = moment().format('s');
+    const hour: number = Number(moment().format('H'));
+    const min: number = Number(moment().format('m'));
+    const sec: number = Number(moment().format('s'));
  
     const sum = hour * 3600 + min * 60 + sec * 1;
 
     if(sum < 30000) {
-      this.setState(() => ({
+      this.setState((): object => ({
         placeholder: `예약시간 전 입니다. - ${hour} : ${min} : ${sec}`       
       }));
     }
 
     else if(sum === 30000) {
-      this.setState(() => ({
+      this.setState((): object => ({
         placeholder: '',
       }));
     }
 
     else if ((sum > 43200 || code === 423) && placeholder !== '오늘의 예약이 마감되었습니다.') {
-      this.setState(() => ({
+      this.setState((): object => ({
         placeholder: '오늘의 예약이 마감되었습니다.',
       }));
     }
   }
 
-  onSubmit = e => {
-    e.preventDefault();
+  onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const { input } = this.state;
     const { onClick } = this.props;
@@ -78,10 +86,10 @@ class SearchBar extends React.Component {
     onClick(input);
   }
 
-  onChange = e => {
-    const { value } = e.target;
+  onChange = (e: React.FormEvent<HTMLInputElement>): void => {
+    const { value } = e.currentTarget;
 
-    this.setState(() => ({
+    this.setState((): object => ({
       input: value,
     }));
   }
@@ -110,23 +118,5 @@ class SearchBar extends React.Component {
     );
   }
 }
-
-SearchBar.propTypes = {
-  // onChange: PropTypes.func,
-  onClick: PropTypes.func,
-  // value: PropTypes.string,
-  // reservation: PropTypes.bool,
-  // placeholder: PropTypes.string,
-  onFocus: PropTypes.func,
-};
-
-SearchBar.defaultProps = {
-  // onChange: () => console.log('no onChange!'),
-  onClick: () => console.log('no onClick!'),
-  // value: '',
-  // reservation: true,
-  // placeholder: '',
-  onFocus: () => console.log('no onFocus!'),
-};
 
 export default SearchBar;

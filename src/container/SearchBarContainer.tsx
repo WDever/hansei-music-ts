@@ -253,7 +253,7 @@ class SearchBarContainer extends React.Component {
     console.log(userInfo);
 
     // LoginActions.isLoaded();
-    return userInfo.accessToken !== undefined
+    userInfo.accessToken !== undefined
       ? LoginActions.autoLogin(true)
       : null;
   };

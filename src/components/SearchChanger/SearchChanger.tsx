@@ -7,8 +7,17 @@ import styles from './SearchChanger.scss';
 
 const cx = classNames.bind(styles);
 
-class SearchChanger extends React.Component {
-  shouldComponentUpdate = (nextProps) => {
+interface SearchChangerProps {
+  cat: number;
+  changeResults(cat: number): void;
+  // userInfo: userInfo;
+  logout(): void;
+  autoLogin: boolean;
+  loginCallback(): void;
+}
+
+class SearchChanger extends React.Component<SearchChangerProps> {
+  shouldComponentUpdate = (nextProps: SearchChangerProps): boolean => {
     const { cat, autoLogin } = this.props;
     return cat !== nextProps.cat || autoLogin !== nextProps.autoLogin;
   };
@@ -105,15 +114,5 @@ class SearchChanger extends React.Component {
     return <div />;
   }
 }
-
-SearchChanger.propTypes = {
-  changeResults: PropTypes.func,
-  cat: PropTypes.number,
-};
-
-SearchChanger.defaultProps = {
-  changeResults: () => console.log('ERROR'),
-  cat: 1,
-};
 
 export default SearchChanger;

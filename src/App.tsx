@@ -1,11 +1,16 @@
-import React from 'react';
+import * as React from 'react';
 // import { Redirect } from 'react-router-dom';
 import MusicListContainer from './container/MusicListContainer';
 import PageTemplate from './components/PageTemplate';
 import SearchBarContainer from './container/SearchBarContainer';
 import './App.scss';
 
-class App extends React.Component {
+interface Props {
+  list: React.ReactElement;
+  search: React.ReactElement;
+}
+
+class App extends React.Component<Props> {
   render() {
     return (
       <PageTemplate

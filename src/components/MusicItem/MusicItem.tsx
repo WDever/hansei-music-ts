@@ -8,12 +8,16 @@ interface MusicItemProps {
   title: string;
   src: string;
   onClick(): void;
+  id: number;
+  key: number;
 }
 
 interface PlaylistItemProps {
   title: string;
   src: string;
   detail: string;
+  id: number;
+  key: number;
 }
 
 interface SearchItemProps {
@@ -21,25 +25,31 @@ interface SearchItemProps {
   src: string;
   artist: string;
   onClick(): void;
+  id: number;
+  key: number;
 }
 
-const MusicItem: React.SFC<MusicItemProps> = ({ title, src, onClick }) => (
+const MusicItem: React.SFC<MusicItemProps> = ({ title, src, onClick, id, key }): JSX.Element => (
   <div
     className={cx('item')}
-    onClick={onClick}
+    id={String(id)}
+    key={key}
   >
+    onClick={onClick}
     <img src={src} alt="success" />
     <div className={cx('title')}>{title}</div>
     <div className={cx('reservation')}>신청하기</div>
   </div>
 );
 
-export const PlaylistItem: React.SFC<PlaylistItemProps> = ({ title, src, detail }) => (
+export const PlaylistItem: React.SFC<PlaylistItemProps> = ({ title, src, detail, id, key }): JSX.Element => (
   <a
     className={cx('item')}
     href={detail}
     target="_blank"
     rel="noopener noreferrer" 
+    id={String(id)}
+    key={key}
   >
     <img src={src} alt="success" />
     <div className={cx('title')}>{title}</div>
@@ -47,8 +57,8 @@ export const PlaylistItem: React.SFC<PlaylistItemProps> = ({ title, src, detail 
   </a>
 );
 
-export const SearchItem: React.SFC<SearchItemProps> = ({ title, src, artist, onClick }) => (
-  <div className={cx('search-item')}>
+export const SearchItem: React.SFC<SearchItemProps> = ({ title, src, artist, onClick, id, key }): JSX.Element => (
+  <div className={cx('search-item')} id={String(id)} key={key}>
     <div className={cx('search-data')}>
       <img className={cx('search-img')} src={src} alt="album art" />
       <div className={cx('search-info')}>

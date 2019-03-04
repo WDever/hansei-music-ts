@@ -1,18 +1,24 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import classNames from 'classnames/bind';
-import { Circle } from 'better-react-spinkit';
+// import { Circle } from 'better-react-spinkit';
 import styles from './MusicList.scss';
 import MusicItem, { PlaylistItem } from '../MusicItem';
 
 const cx = classNames.bind(styles);
 
-class MusicList extends React.Component {
-  shouldComponentUpdate = (nextProps) => {
+interface MusicListProps {
+  check: boolean;
+  loading: boolean;
+  onClick(title: string, album: string, artist: string, id: number): void;
+  // list: ListItem[];
+}
+
+class MusicList extends React.Component<MusicListProps> {
+  shouldComponentUpdate = <MusicListProps extends {}>(nextProps: MusicListProps): boolean => {
     const { list } = this.props;
-    console.log(list)
-    console.log(nextProps.list)
-    console.log(nextProps.list === list || nextProps.list.length === 0)
+    console.log(list);
+    console.log(nextProps.list);
+    console.log(nextProps.list === list || nextProps.list.length === 0);
     return nextProps.list === list || nextProps.list.length === 0;
   }
   
@@ -24,7 +30,7 @@ class MusicList extends React.Component {
         id={item.id}
         title={item.title.concat(' - ', item.artist)}
         src={item.imgSrc}
-        onClick={() => onClick(item.title, item.album, item.artist, item.id)}
+        onClick={(): void => onClick(item.title, item.album, item.artist, item.id)}
       />
     ));
     if (!check) {
