@@ -1014,6 +1014,11 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@types/redux-actions@^2.3.2":
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@types/redux-actions/-/redux-actions-2.3.2.tgz#a141515f280d19fd53be7e8a9994985847423540"
+  integrity sha512-FjXZQQmHCq2mEvIyWdYAgcIYo4qEDLOMTjC2Zwp8s0MjR8jmJORr0Z6zmQLMhkOJh25cjPQ89V3tDgOE4wZx6g==
+
 "@types/redux-promise-middleware@^0.0.11":
   version "0.0.11"
   resolved "https://registry.yarnpkg.com/@types/redux-promise-middleware/-/redux-promise-middleware-0.0.11.tgz#8f7c60fc31d8a644ccdc0e6eeedc4410dc0bcb12"

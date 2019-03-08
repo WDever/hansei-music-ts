@@ -3,17 +3,9 @@ import { TiSocialFacebookCircular } from 'react-icons/ti';
 import FacebookLogin from 'react-facebook-login';
 import classNames from 'classnames/bind';
 import styles from './SearchChanger.scss';
+import { SearchChangerProps } from '../../container/SearchBarContainer';
 
 const cx = classNames.bind(styles);
-
-interface SearchChangerProps {
-  cat: number;
-  changeResults(cat: number): void;
-  // userInfo: userInfo;
-  logout(): void;
-  autoLogin: boolean;
-  loginCallback(): void;
-}
 
 class SearchChanger extends React.Component<SearchChangerProps> {
   shouldComponentUpdate = (nextProps: SearchChangerProps): boolean => {

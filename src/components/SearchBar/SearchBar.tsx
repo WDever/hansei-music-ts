@@ -4,16 +4,17 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import styles from './SearchBar.scss';
 import { ReactComponent as Icon } from './searchIcon.svg';
+import { SearchBarProps } from '../../container/SearchBarContainer';
 
 const cx = classNames.bind(styles);
 
-interface SearchBarProps {
-  code: number;
-  changer: React.ReactElement;
-  canReservation: boolean
-  onFocus(bool: boolean): void;
-  onClick(input: string): void;
-}
+// interface SearchBarProps {
+//   code: number;
+//   changer: React.ReactElement;
+//   canReservation: boolean
+//   onFocus(bool: boolean): void;
+//   onClick(input: string): void;
+// }
 
 interface SearchBarState {
   input: string;
@@ -95,7 +96,7 @@ class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
   }
 
   render() {
-    const { changer, canReservation, onFocus } = this.props;
+    const { changer, availability, onFocus } = this.props;
     const { placeholder, input } = this.state;
     const { onChange, onSubmit } = this; 
     return (
@@ -106,7 +107,7 @@ class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
             className={cx('search')}
             onChange={onChange}
             value={input}
-            placeholder={canReservation ? placeholder : ''}
+            placeholder={availability ? placeholder : ''}
             onFocus={() => onFocus(true)}
             onBlur={() => onFocus(false)}
           />

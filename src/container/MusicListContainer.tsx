@@ -2,21 +2,38 @@ import * as React from 'react';
 import moment from 'moment';
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import * as musicListActions from '../store/modules/musicList';
-import * as searchActions from '../store/modules/search';
-import * as loginActions from '../store/modules/login';
 import MusicList from '../components/MusicList';
+import { MusicListItem } from '../store';
+import { musicListActions, searchActions, loginActions, AppState, userInfo } from '../store';
 import * as api from '../lib/api';
 
 interface MusicListContainerProps {
-  // list: list
   loading: boolean;
   flag: boolean;
   check: boolean;
   code: number;
-  // MusicListActions: typeof musicListActions
-  // SearchActions: typeof searchActions
-  // LoginActions: typeof loginActions
+  list: MusicListItem[];
+  userInfo: userInfo;
+  MusicListActions: typeof musicListActions;
+  SearchActions: typeof searchActions;
+  LoginActions: typeof loginActions;
+}
+
+export interface Items {
+  album: string;
+  artist: string;
+  image_src: string;
+  title: string;
+}
+
+interface TopItems extends Items {
+  rank: string;
+  song_id: string;
+}
+
+interface PlaylistItems extends Items {
+  created: string;
+  music_info_url: string;
 }
 
 class MusicListContainer extends React.Component<MusicListContainerProps> {
@@ -45,10 +62,11 @@ class MusicListContainer extends React.Component<MusicListContainerProps> {
     try {
       const response = await api.getTOP();
 
-      response.data.map(item => {
+      response.data.map((item: TopItems) => {
         const { title, image_src: imgSrc, album, artist, song_id: id } = item;
         console.log(id);
-        return MusicListActions.setData(title, imgSrc, album, artist, id);
+        const Numberid = Number(id);
+        return MusicListActions.setData(title, imgSrc, album, artist, Numberid, '');
       });
 
       console.log(response.data);
@@ -101,7 +119,7 @@ class MusicListContainer extends React.Component<MusicListContainerProps> {
       let id = 0;
 
       // eslint-disable-next-line array-callback-return
-      response.data.results.map(item => {
+      response.data.results.map((item: PlaylistItems) => {
         const { title, image_src: imgSrc, album, artist, music_info_url: url } = item;
         
         console.log(id);
@@ -122,7 +140,7 @@ class MusicListContainer extends React.Component<MusicListContainerProps> {
   }
 }
 
-const mapStateToProps = ({ musicList, search, login }) => ({
+const mapStateToProps = ({ musicList, search, login }: AppState): object => ({
   list: musicList.list,
   loading: musicList.loading,
   code: musicList.code,
@@ -131,7 +149,7 @@ const mapStateToProps = ({ musicList, search, login }) => ({
   userInfo: login.userInfo,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (dispatch: Dispatch): object => ({
   MusicListActions: bindActionCreators(musicListActions, dispatch),
   SearchActions: bindActionCreators(searchActions, dispatch),
   LoginActions: bindActionCreators(loginActions, dispatch),

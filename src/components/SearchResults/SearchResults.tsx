@@ -3,14 +3,27 @@
 import * as React from 'react';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
-import { Circle } from 'better-react-spinkit';
+// import { Circle } from 'better-react-spinkit';
 import { SearchItem } from '../MusicItem';
 import styles from './SearchResults.scss';
+import { SearchResultsProps } from '../../container/SearchBarContainer';
 
 const cx = classNames.bind(styles);
 
-class SearchResults extends React.Component {
-  shouldComponentUpdate = (nextProps) => {
+// interface SearchResultsProps {
+//   // Tlist: Lists;
+//   // Allist: Lists;
+//   // Arlist: Lists;
+//   onClick(title: string, album: string, artist: string, id: number): void;
+//   loading: boolean;
+//   focus: boolean;
+//   flag: boolean;
+//   noResultsInput: string;
+//   cat: number;
+// }
+
+class SearchResults extends React.Component<SearchResultsProps> {
+  shouldComponentUpdate = (nextProps: SearchResultsProps) => {
     const { loading, flag, cat, focus } = this.props
     return loading !== nextProps.loading || flag !== nextProps.flag || cat !== nextProps.cat || focus !== nextProps.focus;
   }
@@ -20,7 +33,7 @@ class SearchResults extends React.Component {
       Tlist,
       Allist,
       Arlist,
-      onClick,
+      resultsOnClick,
       loading,
       focus,
       flag,
@@ -35,7 +48,7 @@ class SearchResults extends React.Component {
         title={item.title}
         src={item.imgSrc}
         artist={item.artist}
-        onClick={() => onClick(item.title, item.album, item.artist, item.id)}
+        onClick={() => resultsOnClick(item.title, item.album, item.artist, item.id)}
       />
     ));
 
@@ -46,7 +59,7 @@ class SearchResults extends React.Component {
         title={item.title}
         src={item.imgSrc}
         artist={item.artist}
-        onClick={() => onClick(item.title, item.album, item.artist, item.id)}
+        onClick={() => resultsOnClick(item.title, item.album, item.artist, item.id)}
       />
     ));
 
@@ -57,7 +70,7 @@ class SearchResults extends React.Component {
         title={item.title}
         src={item.imgSrc}
         artist={item.artist}
-        onClick={() => onClick(item.title, item.album, item.artist, item.id)}
+        onClick={() => resultsOnClick(item.title, item.album, item.artist, item.id)}
       />
     ));
 
@@ -136,23 +149,5 @@ class SearchResults extends React.Component {
     return <div />;
   }
 }
-
-SearchResults.propTypes = {
-  flag: PropTypes.bool,
-  cat: PropTypes.number,
-  Tlist: PropTypes.array,
-  Allist: PropTypes.array,
-  Arlist: PropTypes.array,
-  focus: PropTypes.bool,
-};
-
-SearchResults.defaultProps = {
-  flag: false,
-  cat: 1,
-  Tlist: [],
-  Allist: [],
-  Arlist: [],
-  focus: false,
-};
 
 export default SearchResults;

@@ -5,12 +5,12 @@ import PageTemplate from './components/PageTemplate';
 import SearchBarContainer from './container/SearchBarContainer';
 import './App.scss';
 
-interface Props {
-  list: React.ReactElement;
-  search: React.ReactElement;
-}
+// interface Props {
+//   list: React.ReactElement;
+//   search: React.ReactElement;
+// }
 
-class App extends React.Component<Props> {
+class App extends React.Component {
   render() {
     return (
       <PageTemplate

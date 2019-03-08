@@ -1,5 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames/bind';
+import { MusicListItem } from '../../store';
 // import { Circle } from 'better-react-spinkit';
 import styles from './MusicList.scss';
 import MusicItem, { PlaylistItem } from '../MusicItem';
@@ -10,11 +11,12 @@ interface MusicListProps {
   check: boolean;
   loading: boolean;
   onClick(title: string, album: string, artist: string, id: number): void;
-  // list: ListItem[];
+  list: MusicListItem[];
+  flag: boolean;
 }
 
 class MusicList extends React.Component<MusicListProps> {
-  shouldComponentUpdate = <MusicListProps extends {}>(nextProps: MusicListProps): boolean => {
+  shouldComponentUpdate = (nextProps: MusicListProps): boolean => {
     const { list } = this.props;
     console.log(list);
     console.log(nextProps.list);
